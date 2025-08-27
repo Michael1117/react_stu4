@@ -21,10 +21,10 @@ SHA256:l5N+8iM0FIXV6JwOEBtc2vrOmCyeMaYWMl/b/32nwRs
 cat ~/.ssh/id_rsa.pub
 
 
-git tag v1.0.0
-git tag -a v1.0.0 -m "Release version 1.0.0"
+git tag v1.0.1
+git tag -a v1.0.1 -m "Release version 1.0.1"
 # 推送特定标签
-git push origin v1.0.0
+git push origin v1.0.1
 
 # 推送所有标签
 git push origin --tags
