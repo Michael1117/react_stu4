@@ -1,0 +1,1 @@
+export const REACT_ELEMENT_TYPE = Symbol.for('react.element'); // React元素的类型标识符

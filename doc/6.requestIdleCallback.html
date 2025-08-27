@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>requestIdleCallback</title>
+  </head>
+  <body>
+    <script>
+      function sleep(duration) {
+        for (var t = Date.now(); Date.now() - t <= duration; ) {}
+      }
+
+      const works = [
+        () => {
+          console.log("第1个任务开始");
+          sleep(20);
+          console.log("第1个任务结束");
+        },
+        () => {
+          console.log("第2个任务开始");
+          sleep(20);
+          console.log("第2个任务结束");
+        },
+        () => {
+          console.log("第3个任务开始");
+          sleep(20);
+          console.log("第3个任务结束");
+        },
+        () => {
+          console.log("第4个任务开始");
+          sleep(20);
+          console.log("第4个任务结束");
+        },
+      ];
+      requestIdleCallback(workLoop);
+      function workLoop(deadline) {
+        //console.log(deadline)
+        console.log(`本帧剩余时间`, deadline.timeRemaining());
+        while (deadline.timeRemaining() > 1 && works.length > 0) {
+          performUnitOfWork();
+        }
+        if (works.length > 0) {
+          console.log(`只剩下${deadline.timeRemaining()}ms，时间不够，等待浏览器下次调用`);
+          requestIdleCallback(workLoop);
+        }
+      }
+
+      function performUnitOfWork() {
+        let work = works.shift();
+        work();
+      }
+    </script>
+  </body>
+</html>

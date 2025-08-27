@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      let elVdom = {
+        type: "div",
+        key: "A1",
+        props: {
+          id: "A1",
+          children: [
+            {
+              type: "div",
+              key: "B1",
+              props: {
+                id: "B1",
+                children: [
+                  {
+                    type: "div",
+                    key: "C1",
+                    props: {
+                      id: "C1",
+                    },
+                  },
+                  {
+                    type: "div",
+                    key: "C2",
+                    props: {
+                      id: "C2",
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              type: "div",
+              key: "B2",
+              props: {
+                id: "B2",
+              },
+            },
+          ],
+        },
+      };
+
+      function render(vdom, container) {
+        let dom = document.createElement(vdom.type);
+        Object.keys(vdom.props)
+          .filter((key) => key !== "children")
+          .forEach((key) => {
+            dom[key] = vdom.props[key];
+          });
+
+        if (Array.isArray(vdom.props.children)) {
+          //console.log(child)
+          console.log(vdom.props.children)
+          vdom.props.children.forEach((child) => render(child, dom));
+        }
+
+        container.appendChild(dom);
+      }
+      render(elVdom, document.getElementById("root"));
+    </script>
+  </body>
+</html>
