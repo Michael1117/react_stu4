@@ -8,28 +8,15 @@ shared
 
 React 18 之前使用 effectList 收集副作用，现在为什么用递归了
 
-export function processUpdateQueue(workInProgress) {
-const queue = workInProgress.updateQueue;
-const pendingQueue = queue.shared.pending;
+```shell
+git init
+git add .
+git commit -m "first commit"
+git remote add origin "xxx"
+git push -u origin master
 
-if (pendingQueue !== null) {
+ssh-keygen -t rsa -b 4096 -C "1322720377@qq.com"
 
-    queue.shared.pending = null;
-
-    const lastPendingUpdate = pendingQueue;
-
-    const firstPendingUpdate = lastPendingUpdate.next;
-
-    lastPendingUpdate.next = null;
-
-    let newState = workInProgress.memoizedState;
-    let update = firstPendingUpdate;
-    while (update) {
-
-      newState = getStateFromUpdate(update, newState);
-    }
-
-    workInProgress.memoizedState = newState;
-
-}
-}
+SHA256:l5N+8iM0FIXV6JwOEBtc2vrOmCyeMaYWMl/b/32nwRs
+cat ~/.ssh/id_rsa.pub
+```
